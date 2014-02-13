@@ -8,7 +8,7 @@ void Epic::pointArea(int x, int y, int area)
     cout<<"can't have points with zero or negative area: "<<area<<endl;
     return;  // can't generate points with illegal area
   }
-  for (int i = 1; i<=area; i++)
+  for (int i = 1; i<=area; i++)	// i start from 1 !!!
   {
     if((area%i)==0)  // find a pair, will have four types for each pair
     { 
@@ -33,5 +33,34 @@ void Epic::pointArea(int x, int y, int area)
   }
   cout<<"totally: "<<points.size()*4<<" points!"<<endl;
 }
+
+void Epic::additiveNumber(string numSeq)
+{
+    vector<string> additive;
+    if(numSeq.size()<3) {
+      cout<<"illegal size! "<<endl; 
+      return;
+    }
+    for (int i=0; i<numSeq.size(); i++){
+        if(numSeq[i]>'9' || numSeq[i]<'0'){
+          cout<<"illegal character!"<<endl;	//ignore the alphabet
+          return;
+      }
+    }
+    for (int i=0; i<numSeq.size()-2; i++)
+    {
+      int first = numSeq[i]-'0';
+      int second = numSeq[i+1]-'0';
+      if (first+second<10 && first+second==(numSeq[i+2]-'0'))
+        additive.push_back(numSeq.substr(i,3));
+      if (first+second>10 && i<numSeq.size()-3 && first+second == (numSeq[i+2]-'0')*10+numSeq[i+3]-'0')
+        additive.push_back(numSeq.substr(i,4)); 
+    }
+    cout<<"total numbers: "<<additive.size()<<endl;
+    for (int i =0; i<additive.size(); i++)
+      cout<<"-"<<additive[i]<<endl;
+}
+
+
 
 
