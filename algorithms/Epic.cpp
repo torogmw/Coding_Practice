@@ -78,3 +78,24 @@ void Epic::removeDuplicates(string s)
    cout<<"output: "<<out<<endl;
 }
 
+void Epic::inplaceReorder(string s1, string s2)
+{
+    // O(n^2) brutal force
+    if(s1.size()!=s2.size()) return;
+    cout<<s1<<"->"<<s2<<endl;
+    for (int j = 0; j<s2.size(); j++){
+      for (int i = j; i<s1.size(); i++){
+        if(s1[j]==s2[j]) break;
+        if(s1[i]==s2[j])   // swap s1 with index i and j
+        {
+          char temp = s1[i];
+          s1[i] = s1[j];
+          s1[j] = temp;
+          cout<<"swap "<<s1[i]<<" and "<<s1[j]<<endl;
+          break;
+        }
+      }
+    }   
+}
+
+

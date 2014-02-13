@@ -20,4 +20,7 @@ public:
   
   //remove duplicates for a given string
   void removeDuplicates(string s);
+  
+  // inlace re-order steps
+  void inplaceReorder(string s1, string s2);
 };
