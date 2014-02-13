@@ -17,4 +17,7 @@ public:
     
   //find all additve Number sequence for a given input
   void additiveNumber(string numSequence);
+  
+  //remove duplicates for a given string
+  void removeDuplicates(string s);
 };

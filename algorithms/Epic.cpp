@@ -61,6 +61,20 @@ void Epic::additiveNumber(string numSeq)
       cout<<"-"<<additive[i]<<endl;
 }
 
-
-
+void Epic::removeDuplicates(string s)
+{
+   if (s.size()== 0)
+   {
+     cout<<"ni ta ma chi zai duo wo?"<<endl;
+     return;
+   }
+   cout<<"input: "<<s<<endl;
+   string out;
+   for (int i = 0; i<s.size()-1; i++)
+   {
+     if(s[i]!=s[i+1]) out.append(s.substr(i,1));
+   }
+   out.append(s.substr(s.size()-1,1));  //final output
+   cout<<"output: "<<out<<endl;
+}
 
