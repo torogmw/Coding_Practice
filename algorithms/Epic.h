@@ -23,4 +23,18 @@ public:
   
   // inlace re-order steps
   void inplaceReorder(string s1, string s2);
+
+  // max sum for consecutive array
+  int maxSum(int arr[], int size);
+  
+  // determine if it is a well ordered number, well ordered means i-th less than i+1-th
+  bool isWellOrdered(int n);
+
+  // determine mango in a random generated array
+  bool isMingo(int arr[], int size);  // remain question
+
+  // determine solution from given packet, actually a subset sum problem
+  bool hasSolution(int set[],int size,int sum);
+
+  
 };

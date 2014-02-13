@@ -98,4 +98,129 @@ void Epic::inplaceReorder(string s1, string s2)
     }   
 }
 
+int Epic::maxSum(int arr[], int size){
+    // dynamic programming
+    int max = 0;
+    int temp = 0;
+    int index = 0; 
+    if(size==0) return 0;
+    if(size==1) return arr[0];
+    for(int i = 0; i<size; i++)
+    {
+      temp+=arr[i];
+      if(temp>max) 
+      {
+        max = temp;
+        index = i;
+      }
+      if(temp<0) temp = 0;
+    }
+    cout<<"max sum: "<<max<<endl;
+    return max;
+}
+
+bool Epic::isWellOrdered(int n)
+{
+  int prev=9;
+  while(n/10>0)
+  {
+    int temp = n%10;
+    n = n/10;
+    if (temp>prev) return false;
+    else prev = temp;
+  }
+  if(n>prev) return false;
+  else return true;
+}
+
+bool Epic::isMingo(int arr[], int size)
+{
+  // first, generate the mango
+  int mingo[100][100];
+  bool winner = false;
+  for (int i = 0; i<100; i++)
+  {
+    int oneLine[100];
+    for (int j = 0; j<100; j++)
+    {
+       oneLine[j] = 100*i+j+1;    
+    }
+  }
+  // find the element, remove it
+  for (int i = 0; i<size; i++)
+  {
+    int row = (arr[i]-1)/100;
+    int col = arr[i]-row*100-1; 
+    mingo[row][col] = 0;
+    // determine mango winner here
+   for (int k = 0; k<100; k++)
+   {
+     if(mingo[row][k]!=0) break;
+     if(mingo[row][k]==0 && k==99) winner = true;
+   }
+   
+   for (int k = 0; k<100; k++)
+   {
+     if(mingo[k][col]!=0) break;
+     if(mingo[k][col]==0 && k==99) winner = true;
+   }
+   if(col>row)
+   {  //col < row. start from col
+     for (int k = 0; k<100-row+col; k++)
+     {
+       if(mingo[k][k-row+col]!=0) break;
+       if(mingo[k][k-row+col]==0 && k == 99-row+col) winner = true;
+     }
+   }
+   else
+   {    // col>row, start from row 0
+     for (int k = 0; k<100-col+row; k++)
+     {
+      if(mingo[k][k+row-col]!=0) break;
+      if(mingo[k][k+row-col]==0 && k == 99+row-col) winner = true;
+     }
+   }
+   if (winner)
+   {
+    cout<<"winner ends up at: "<<arr[i]<<endl; 
+    return true;
+   }
+  }
+  return false;
+}
+
+bool Epic::hasSolution(int set[], int size, int sum)
+{
+  // we are doing recursive, but NP-complete
+  /*
+  if (sum==0) return true;
+  if (sum>0 && size == 0) return false;
+  if (set[size-1]>sum) //if the last element is larger then sum ,we won't use it.
+    return hasSolution(set,size-1,sum);
+  return hasSolution(set,size-1,sum-set[size-1])||hasSolution(set,size-1,sum);
+  */
+
+  // Let's try some dynamic programming
+  bool table[sum+1][size+1]; //create a 2d array
+  //base case: sum is 0 true! size is 0 false!
+  for (int i = 0; i<=size; i++) table[0][i] = true;
+  for (int i = 1; i<=sum; i++) table[i][0] = false;
+  
+  // fill the table
+  for (int i = 1; i<=sum; i++)
+  {
+    for (int j =1; j<=size; j++)
+    {
+      table[i][j] = table[i][j-1];
+      if(set[j-1]<=i)
+        table[i][j] = table[i][j-1] || table[i-set[j-1]][j-1];
+    }
+  }
+  return table[sum][size];
+}
+
+
+
+
+
 
