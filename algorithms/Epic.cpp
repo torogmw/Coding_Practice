@@ -1,5 +1,7 @@
 #include "Epic.h"
 
+
+
 void Epic::pointArea(int x, int y, int area)
 {
   vector<vector<int> > points;
@@ -278,7 +280,6 @@ string Epic::keyboardMapping(string& text)
   }
   return result;
 }
-
 
 
 
