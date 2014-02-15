@@ -1,13 +1,15 @@
-/*///////////////////////////////
-//
-//  header file for all solutions
-//  Minwei Gu @ Student Center
-//
-//////////////////////*//////////
+/*///////////////////////////////////
+//                                 //
+//  header file for all solutions  //
+//  Minwei Gu @ Student Center     // 
+//                                 //
+//////////////////////*//////////////
 
 #include <iostream>
 #include <vector>
 #include <string>
+#include <queue>
+#include <fstream>
 using namespace std;
 
 class Epic{
@@ -35,6 +37,12 @@ public:
 
   // determine solution from given packet, actually a subset sum problem
   bool hasSolution(int set[],int size,int sum);
+  
+  // find revised average, remove the three largest element
+  int revisedAverage(int arr[], int size);
 
+  // mapping keyboard to different characters, generate all possible string message 
+  string keyboardMapping(string& text);
+  
   
 };

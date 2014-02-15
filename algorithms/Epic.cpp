@@ -219,6 +219,69 @@ bool Epic::hasSolution(int set[], int size, int sum)
   return table[sum][size];
 }
 
+int Epic::revisedAverage(int arr[], int size){
+  if (size<3) return 0; //not enough elements
+  if (size == 3) return (arr[0]+arr[1]+arr[2])/3;
+  int buffer[3] = {0,0,0}; 	//the buffer is ordered from big to small, maintain the top 3
+  for(int i = 0; i<size; i++)
+  {
+    if(arr[i]>buffer[0]) // the biggest value
+    {
+      buffer[2] = buffer[1];
+      buffer[1] = buffer[0];
+      buffer[0] = arr[i];
+    }
+    else if(arr[i]>buffer[1] && arr[i]<=buffer[0]) // the 2nd biggest value
+    {
+      buffer[2] = buffer[1];
+      buffer[1] = arr[i];
+    }
+    else if(arr[i]>buffer[0] && arr[i]<=buffer[1]) // the 3rd biggest value
+    {
+      buffer[0] = arr[i];
+    }
+  }
+  int sum = 0;
+  for (int i = 0; i<size; i++) sum+=arr[i];
+  return (sum-buffer[0]-buffer[1]-buffer[2])/(size-3);
+}
+
+string Epic::keyboardMapping(string& text)
+{
+  // first, initialize the mapping
+  string map[]={"0",",1","abc2","def3","ghi4","jkl5","mno6","pqrs7","tuv8","wxyz9"};
+  string result = ""; //the string we are going to return
+  int index; //index to detect how many identical numbers bave been pressed continuously
+  int number; //the current number we detected
+  cout<<"total size: "<<text.size()<<endl;
+  for (int i = 0; i<text.size(); ++i)
+  {
+    index=number=0;
+    if(text[i] == '#') continue; //do nothing
+    else if(text[i] == '*') {
+      text.push_back(' '); //push a space in to the result
+      continue;            //keep moving on to the next character
+    }
+    else if(text[i]>='0'&& text[i]<='9')
+    {
+      number = text[i]-'0';
+      ++i;   //move forward to check if the next is the same number pressed
+      while(i<text.size() && text[i]-'0' == number)
+     {
+        index++;
+        i++;
+     }
+     index %= map[number].size();     //mod to the current index
+     result.push_back(map[number][index]);
+      --i; //move back an index
+    }
+  }
+  return result;
+}
+
+
+
+
 
 
 
